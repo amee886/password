@@ -1,58 +1,45 @@
-password = input("Введите пароль: ")
-len_str = len(password)
-score = 0
+PASSWORD = input("Введите пароль: ")
 
 
-def is_very_long(password):
-    if len_str > 12:
-        return True
-    else:
-        return False
+def main():
+    def is_very_long(PASSWORD):
+        return len(PASSWORD) > 12
+
+         
+    def has_digit(PASSWORD):
+        return any(i.isdigit() for i in PASSWORD)
 
 
-def has_digit(password):
-    for i in password:
-        if i.isdigit():
-            return True
-    return False
+    def has_upper_letters(PASSWORD):
+        return any(i.isupper() for i in PASSWORD)
 
 
-def has_upper_letters(password):
-    for i in password:
-        if i.isupper():
-            return True
-    return False
+    def has_lower_letters(PASSWORD):
+        return any(i.islower() for i in PASSWORD)
 
 
-def has_lower_letters(password):
-    for i in password:
-        if i.islower():
-            return True
-    return False
+    def has_symbols(PASSWORD):
+        return any(i in "!@#$%^&*()-_=+[]{}|;:',.<>?/" for i in PASSWORD)
+    
+
+    list_function = [
+        is_very_long,
+        has_digit,
+        has_upper_letters,
+        has_lower_letters,
+        has_symbols
+    ]
+
+    score = 0
 
 
-symbols = "!@#$%^&*()-_=+[]{}|;:'"
+    for function in list_function:
+        if function(PASSWORD):
+            score += 2
 
 
-def has_symbols(password):
-    for i in password:
-        if i in symbols:
-            return True
-    return False
+    print(f"Рейтинг пароля: {score}")
 
 
-list_function = [
-    is_very_long,
-    has_digit,
-    has_upper_letters,
-    has_lower_letters,
-    has_symbols
-]
-
-
-for function in list_function:
-    if function(password):
-        score += 2
-
-
-print(f"Рейтинг пароля: {score}")
+if __name__ == "__main__":
+    main()
