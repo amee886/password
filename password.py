@@ -1,26 +1,25 @@
-PASSWORD = input("Введите пароль: ")
-
-
-def main():
-    def is_very_long(PASSWORD):
-        return len(PASSWORD) > 12
+def is_very_long(password):
+    return len(password) > 12
 
          
-    def has_digit(PASSWORD):
-        return any(i.isdigit() for i in PASSWORD)
+def has_digit(password):
+    return any(i.isdigit() for i in password)
 
 
-    def has_upper_letters(PASSWORD):
-        return any(i.isupper() for i in PASSWORD)
+def has_upper_letters(password):
+    return any(i.isupper() for i in password)
 
 
-    def has_lower_letters(PASSWORD):
-        return any(i.islower() for i in PASSWORD)
+def has_lower_letters(password):
+    return any(i.islower() for i in password)
 
 
-    def has_symbols(PASSWORD):
-        return any(i in "!@#$%^&*()-_=+[]{}|;:',.<>?/" for i in PASSWORD)
+def has_symbols(password):
+    return any(not i.isdigit() and i.isalpha() for i in password)
+
     
+def main():
+    password = input("Введите пароль: ")
 
     list_function = [
         is_very_long,
@@ -34,7 +33,7 @@ def main():
 
 
     for function in list_function:
-        if function(PASSWORD):
+        if function(password):
             score += 2
 
 
@@ -43,3 +42,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
